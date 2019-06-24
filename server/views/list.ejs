@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+    <style>
+        .row {
+            margin-top: 40px;
+            padding: 0 10px;
+            height: 68vh;
+            overflow-y: auto;
+        }
+
+        .clickable {
+            cursor: pointer;
+        }
+
+        .panel-heading div {
+            margin-top: -18px;
+            font-size: 15px;
+        }
+
+        .panel-heading div span {
+            margin-left: 5px;
+        }
+
+        .panel {
+            overflow: auto;
+        }
+    </style>
+
+    <body>
+        <% include navbar %>
+            <hr>
+            <div class="container">
+                <div class="page-header">
+                        List
+                </div>
+                <div class="row">
+                    <div class="col-md-16">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Uploaded Files</h3>
+
+                            </div>
+                            <table class="table table-hover" id="task-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>File Name</th>
+                                        <th>Size</th>
+                                        <th>Created Date</th>
+                                        <th>File Type</th>
+                                        <th>File Name In Disk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i = 0; i < data.length; i++) { %>
+                                        <tr>
+                                            <td>
+                                                <%= i+1 %>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-link btn-md" href="/listing?id=<%= data[i]._id %>" role="button">
+                                                    <%= data[i].originalName %>
+                                                        &raquo;</a>
+                                            </td>
+                                            <td>
+                                                <%= data[i].size %>
+                                            </td>
+                                            <td>
+                                                <%= data[i].date %>
+                                            </td>
+                                            <td>
+                                                <%= data[i].type %>
+                                            </td>
+                                            <td>
+                                                <%= data[i].fileName%>
+                                            </td>
+
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <% include footer %>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#list').addClass("active");
+                    });
+                </script>
+    </body>
+
+</html>

@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="table-responsive-sm" style="margin-top: 20px">          
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Filename</th>
+          <th>size</th>
+          <th>type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="d in lists track by $index">
+          <td>{{d.date}}</td>
+          <td><a ng-click="filedata(d._id)">{{d.originalName}}</a></td>
+          <td>{{d.size | sizeFilter}}</td>
+          <td>{{d.type}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>

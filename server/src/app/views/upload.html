@@ -1,0 +1,18 @@
+<div class="container">
+    <h2>File Upload</h2>
+    <div>
+        <form>
+            <div class="upload" ngf-select ng-model="files" name="uploadFiles" ngf-pattern="'.csv'" accept=".csv"><label class="file-label"><a>Select Excel File</a></label></div><br>
+            <button ng-disabled="!files.name" ng-click="uploadCtrl.upload();" type="button" class="btn  btn-primary">Upload</button>
+            <button type="button" class="btn  btn-warning" ng-click="uploadCtrl.reset();">Reset</button>
+            <button type="button" class="btn  btn-warning" ng-click="uploadCtrl.files();">Files</button>
+            <div style="margin-top: 20px;">
+                <ul ng-if="files" style="list-style-type: none;">
+                    <li> {{files.name}}</li>
+                    {{uploadCtrl.progress}}
+                    <md-progress-linear ng-if="uploadCtrl.progress >= 0" md-mode="determinate" value="{{uploadCtrl.progress}}">{{uploadCtrl.progress}}%</md-progress-linear>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>

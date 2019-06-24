@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<style>
+    .file{
+        margin-top: 130px;
+    }
+    form {
+        margin-bottom: 540px;
+    }
+</style>
+<body>
+<% include navbar %>
+<div class="container">
+    <hr>
+    <hr>
+    <form id="uploadForm"
+          enctype="multipart/form-data"
+          action="/upload"
+          method="post">
+        <div class="form-group file">
+            <label class="col-md-2 control-label">File Upload</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                    <input name="file" placeholder="files" class="form-control" type="file" id="inputFileToLoad" required>
+                </div>
+            </div>
+        </div>
+        <p style="color:red;"><%= title%></p>
+        <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+                <button type="submit" class=" btn btn-success btn-lg">Upload</button>
+                <button type="reset" class="btn btn-warning btn-lg">Reset</button>
+            </div>
+        </div>
+        <span id = "status"></span>
+    </form>
+    <script>
+        $(document).ready(function() {
+            $('#uploadForm').submit(function() {
+                $("#status").empty().text("File is uploading...");
+                $(this).ajaxSubmit({
+                    error: function(xhr) {
+                        console.log(xhr)
+                        status('Error: ' + xhr.status);
+                    },
+                    success: function(response) {
+                        console.log(response)
+                        $("#status").empty().text(response);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#home').addClass("active");
+        });
+    </script>
+    </div>
+    <% include footer %>
+</body>
+</html>

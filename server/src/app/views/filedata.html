@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="table-responsive-sm" style="margin-top: 20px">
+        <table class="table table-bordered">
+            <thead>
+                <tr >
+                    <th ng-repeat="th in headers track by $index">{{th}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="r in listData track by $index">
+                    <td  ng-repeat="(key,val) in r track by $index">{{val}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

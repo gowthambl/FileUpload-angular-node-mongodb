@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<style>
+    .row {
+            margin-top: 40px;
+            padding: 0 10px;
+            height: 68vh;
+            overflow-y: auto;
+        }
+
+        .clickable {
+            cursor: pointer;
+        }
+
+        .panel-heading div {
+            margin-top: -18px;
+            font-size: 15px;
+        }
+
+        .panel-heading div span {
+            margin-left: 5px;
+        }
+
+        .panel {
+            overflow: auto;
+        }
+    </style>
+
+<body>
+    <% include navbar %>
+    <hr>
+    <div class="container">
+        <div class="page-header">
+            List
+        </div>
+        <div class="row">
+            <div class="col-md-16">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Listing</h3>
+                    </div>
+                    <table class="table table-hover" id="task-table">
+                        <thead>
+                            <tr>
+                                <% for(var i = 0; i < datas.headers.length; i++) { %>
+                                <th>
+                                    <%= datas.headers[i] %>
+                                </th>
+                                <% } %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                       
+                            <% for(var i = 0; i < datas.result.length; i++) { %>
+                            <tr>
+                               <!--  <% for(var j = 0; j < datas.result[i].length; j++) { %>
+                                <td>
+                                    <%= datas.result[i][j]%>
+                                </td>
+                                <% } %> -->
+                            </tr>
+                            <% } %>
+                        
+                        <!-- <tr>
+                            <% for(var i = 0; i < datas.result.length; i++) { %>
+                            <td>
+                                <%= datas.result[i] %>
+                            </td>
+                            <% } %>
+                        </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% include footer %>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#list').addClass("active");
+    });
+    </script>
+</body>
+
+</html>
