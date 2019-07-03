@@ -1,14 +1,23 @@
 <div class="container-fluid">
     <div class="table-responsive-sm" style="margin-top: 20px">
+        <button ng-click="saveCsv()">SAVE</button>
         <table class="table table-bordered">
             <thead>
-                <tr >
+                <tr>
                     <th ng-repeat="th in headers track by $index">{{th}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="r in listData track by $index">
-                    <td  ng-repeat="(key,val) in r track by $index">{{val}}</td>
+                    <!-- <td ng-repeat="(key,val) in r track by $index">{{val}}</td> -->
+                    <td ng-repeat="(key,val) in r track by $index" flex>
+                        <div ng-show="!edit" style="background: transparent;border: transparent;outline: none;" ng-click="edit = true;">
+                            {{val}}
+                        </div>
+                        <div ng-show="edit" flex>
+                            <input type="text" id="{{$index}}" style="width: 100%" ng-model="r[key]" ng-blur="edit = false;">
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

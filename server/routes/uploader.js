@@ -3,6 +3,8 @@ import path from 'path';
 import FileModel from './../helpers/db/fileModel'
 import mammoth from "mammoth";
 import fs from 'fs';
+var csvWriter = require('csv-write-stream')
+// var writer = csvWriter();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -68,11 +70,14 @@ export default class UploadFile {
                 let lines = csv.split('\n');
                 var result = [];
                 var headers = lines[0].split(",");
+                for (var i = 0; i < headers.length; ++i) {
+                    headers[i] = headers[i].replace(/(\r\n|\n|\r)/gm, "")
+                }
                 for (var i = 1; i < lines.length; i++) {
                     var obj = {};
                     var cl = lines[i].split(',');
                     for (var j = 0; j < headers.length; j++) {
-                        obj[headers[j]] = cl[j];
+                        obj[headers[j]] = cl[j] ? cl[j].replace(/(\r\n|\n|\r)/gm, "") : '';
                     }
                     result.push(obj)
                 }
@@ -93,5 +98,23 @@ export default class UploadFile {
         })
 
 
+    }
+    static updateCsv(req, res) {
+        var header = req.body.csv_headers;
+        var cellData = req.body.celldata;
+        var csvid = req.body.csvid;
+        FileModel.findOne({ _id: csvid }).then(data => {
+            let filePath = data.path;
+            for (var i = 0; i < header.length; ++i) {
+                header[i] = header[i].replace(/(\r\n|\n|\r)/gm, "")
+            }
+            let writer = csvWriter({ headers: header });
+            writer.pipe(fs.createWriteStream(filePath))
+            for (let j = 0; j < cellData.length; j++) {
+                writer.write(cellData[j]);
+            }
+            writer.end();
+            res.status(200).send({ msg: "Data has been updated" });
+        });
     }
 }
