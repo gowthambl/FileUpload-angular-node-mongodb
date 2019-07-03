@@ -1,0 +1,3 @@
+server/views/files
+node_modules/
+.env

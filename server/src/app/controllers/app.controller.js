@@ -12,7 +12,7 @@ app.config(function($routeProvider) {
         .when("/data", {
             templateUrl: "./views/filedata.html",
             controller: "uploadDataController"
-        });
+        }).otherwise("/upload");
 });
 
 app.controller("uploadController", function($scope, Upload, $http, $location) {
@@ -76,11 +76,19 @@ app.controller("uploadDataController", function($scope, $location, $window, $htt
         }
         $scope.headers = response.data.headers;
         $scope.listData = response.data.result;
-        console.log("$scope.listData", $scope.listData);
     });
 
-
-
+    $scope.saveCsv = function() {
+        console.log("$scope.listData", $scope.listData[0]);
+        let payload = {
+            csv_headers: $scope.headers,
+            celldata: $scope.listData,
+            csvid: id
+        }
+        $http.put('/update', payload).then(response => {
+            swal(response.data.msg);
+        });
+    }
 });
 
 app.filter('sizeFilter', sizeFilter);
