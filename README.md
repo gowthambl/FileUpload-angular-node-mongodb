@@ -1,5 +1,6 @@
-# CSVfile-upload-node-ejs
-upload CSV file , store in Mongo db and view in table structure using Angular.js 
+# CSVfileUpload-angular-node-mongodb
+upload CSV file , store in Mongo db and view in table structure using Angular.js.
+Edit the field and save as CSV file.
 
 install mongodb and use it as db
 
